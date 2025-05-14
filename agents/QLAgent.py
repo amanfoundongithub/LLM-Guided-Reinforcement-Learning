@@ -10,7 +10,7 @@ from utils.constants import name_of_environment, env, lr, gamma
 from utils.llama import suggest_llm_action
 
 
-
+# CNN that extracts features from the image
 class QNetworkCNN(nn.Module):
     def __init__(self, obs_shape, action_dim):
         super().__init__()
@@ -69,7 +69,11 @@ class QLearningAgent:
         
         # Epsilon-greedy action selection
         if random.random() < self.epsilon:
+            
+            # Uncomment below line for random epsilon policy 
             # return random.randint(0, self.action_dim - 1)
+            
+            # This line is for the llm action suggestion 
             action = suggest_llm_action(env, name_of_environment, env.action_space.n, obs) 
             return action 
         else:
